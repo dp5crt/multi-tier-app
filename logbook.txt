@@ -1,0 +1,8 @@
+Phase,Activity/Problem,Resolution & Technical Detail
+Week 2,Initial Build Failure,Encountered react-scripts not recognized. Resolved by running npm install locally to populate node_modules before containerization.
+Week 2,Docker Connectivity,"Fixed ERR_EMPTY_RESPONSE by implementing a Bind Mount in docker-compose.yml, mapping local ./web/build to Nginx root."
+Week 2,YAML Syntax Error,Debugged additional properties 'web' not allowed. Corrected indentation in the Compose file to align services under the services: key.
+Week 3,Minikube Setup,Installed minikube and kubectl via winget. Resolved CommandNotFoundException by restarting the terminal to refresh System PATH.
+Week 3,Image Pull Error,Resolved ErrImagePull by syncing the PowerShell environment to Minikube's Docker daemon using minikube docker-env.
+Week 3,K8s Connectivity,Diagnosed SVC_NOT_FOUND. Authored and applied web-deploy.yaml with a NodePort service to expose the frontend.
+Week 3,Advanced Controllers,"Expanded architecture by adding DaemonSet (monitoring), StatefulSet (database persistence), and ReplicaSet (redundancy)."
