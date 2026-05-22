@@ -6,8 +6,13 @@ spec:
   podSelector:
     matchLabels:
       app: db
-  ingress:
-  - from:
-    - podSelector:
-        matchLabels:
-          app: backend
+    policyTypes:
+    - Ingress
+    ingress:
+  -   from:
+    -   podSelector:
+          matchLabels:
+            app: backend
+      ports:
+      -   protocol: TCP
+          port: 5432

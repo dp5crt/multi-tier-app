@@ -6,3 +6,5 @@ Week 3,Minikube Setup,Installed minikube and kubectl via winget. Resolved Comman
 Week 3,Image Pull Error,Resolved ErrImagePull by syncing the PowerShell environment to Minikube's Docker daemon using minikube docker-env.
 Week 3,K8s Connectivity,Diagnosed SVC_NOT_FOUND. Authored and applied web-deploy.yaml with a NodePort service to expose the frontend.
 Week 3,Advanced Controllers,"Expanded architecture by adding DaemonSet (monitoring), StatefulSet (database persistence), and ReplicaSet (redundancy)."
+Week 4,StatefulSet Validation Error,Encountered forbidden updates when modifying storage parameters. Resolved by deleting the active statefulset via kubectl delete statefulset db-cluster and reapplying manifestations to bring all system pods to a stable 1/1 Running state.
+Week 4,Manifest Schema Reorganization,Refactored standalone Kubernetes manifests into component-specific tracking files including backend-deploy.yaml and db-deploy.yaml to enforce structural separation of concerns across tiers.

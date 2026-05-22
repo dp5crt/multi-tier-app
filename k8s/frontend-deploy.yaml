@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: frontend-scaler
 spec:
-  replicas: 3 # Running 3 copies for high availability
+  replicas: 3
   selector:
     matchLabels:
       app: frontend
