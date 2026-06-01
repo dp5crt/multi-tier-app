@@ -1,0 +1,19 @@
+apiVersion: openfaas.com/v1
+kind: Function
+metadata:
+  name: image-processor
+  namespace: openfaas-fn
+spec:
+  name: image-processor
+  image: ghcr.io/openfaas/classic-watchdog:latest
+  handler: node ./handler.js
+  environment:
+    write_timeout: "30s"
+    read_timeout: "30s"
+    exec_timeout: "30s"
+  limits:
+    memory: "128Mi"
+    cpu: "100m"
+  requests:
+    memory: "64Mi"
+    cpu: "50m"

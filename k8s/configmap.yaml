@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: backend-config
-data:
-  DATABASE_URL: "postgresql://postgres@db-cluster:5432/todo"
-  PORT: "5000"

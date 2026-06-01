@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: edge-service
+  namespace: edge
+  labels:
+    app: edge-service
+    tier: edge
+spec:
+  containers:
+  - name: lightweight-service
+    image: alpine:latest
+    command: ["/bin/sh", "-c"]
+    args:
+      - |
+        apk add --no-cache curl &&
+        while true; do
+          echo "Edge node reporting at $(date) - CPU: $(cat /proc/loadavg)";
+          sleep 30;
+        done
+    resources:
+      requests:
+        memory: "32Mi"
+        cpu: "10m"
+      limits:
+        memory: "64Mi"
+        cpu: "50m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: edge-service
+  namespace: edge
+spec:
+  selector:
+    app: edge-service
+  ports:
+  - port: 8080
+    targetPort: 8080

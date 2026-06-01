@@ -1,18 +1,49 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: db-policy
+  name: backend-network-policy
+  namespace: app-production
+spec:
+  podSelector:
+    matchLabels:
+      app: backend
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: web
+    ports:
+    - protocol: TCP
+      port: 5000
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: db-network-policy
+  namespace: app-production
 spec:
   podSelector:
     matchLabels:
       app: db
   policyTypes:
-    - Ingress
+  - Ingress
   ingress:
-    - from:
-        - podSelector:
-            matchLabels:
-              app: backend
-      ports:
-        - protocol: TCP
-          port: 5432
+  - from:
+    - podSelector:
+        matchLabels:
+          app: backend
+    ports:
+    - protocol: TCP
+      port: 5432
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: app-production
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress

@@ -8,11 +8,12 @@ function App() {
   const [editingId, setEditingId] = useState(null);
   const [updatedTask, setUpdatedTask] = useState('');
 
-  const API_URL = process.env.REACT_APP_API_URL || 'http://backend-service:5000';
+  // FIXED: Use relative path for nginx proxy (no backend-service:5000)
+  const API_URL = '';
 
   const fetchTodos = async () => {
     try {
-      const res = await axios.get(`${API_URL}/api/todos`);
+      const res = await axios.get(`/api/todos`);
       setTodos(res.data);
     } catch (err) {
       console.error("Error fetching tasks:", err);
@@ -25,18 +26,18 @@ function App() {
 
   const addTodo = async () => {
     if (!newTask.trim()) return;
-    await axios.post(`${API_URL}/api/todos`, { title: newTask });
+    await axios.post(`/api/todos`, { title: newTask });
     setNewTask('');
     fetchTodos();
   };
 
   const deleteTodo = async (id) => {
-    await axios.delete(`${API_URL}/api/todos/${id}`);
+    await axios.delete(`/api/todos/${id}`);
     fetchTodos();
   };
 
   const toggleComplete = async (todo) => {
-    await axios.put(`${API_URL}/api/todos/${todo.id}`, {
+    await axios.put(`/api/todos/${todo.id}`, {
       title: todo.title,
       completed: !todo.completed
     });
@@ -44,7 +45,7 @@ function App() {
   };
 
   const updateTodo = async (id) => {
-    await axios.put(`${API_URL}/api/todos/${id}`, { title: updatedTask, completed: false });
+    await axios.put(`/api/todos/${id}`, { title: updatedTask, completed: false });
     setEditingId(null);
     setUpdatedTask('');
     fetchTodos();

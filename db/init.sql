@@ -7,8 +7,6 @@ CREATE TABLE IF NOT EXISTS todos (
 
 CREATE INDEX IF NOT EXISTS idx_todos_created_at ON todos (created_at DESC);
 
-INSERT INTO todos (title, completed) 
-VALUES 
-    ('Learn Docker', FALSE),
-    ('Build ToDo App', TRUE)
-WHERE NOT EXISTS (SELECT 1 FROM todos);
+INSERT INTO todos (title, completed)
+VALUES ('Learn Docker', FALSE), ('Build ToDo App', TRUE)
+ON CONFLICT DO NOTHING;
