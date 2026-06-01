@@ -1,17 +1,16 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: node-monitor
+  name: monitoring-agent
 spec:
   selector:
     matchLabels:
-      name: monitor
+      app: monitor
   template:
     metadata:
       labels:
-        name: monitor
+        app: monitor
     spec:
       containers:
-      - name: monitor-agent
-        image: alpine
-        command: ["sh", "-c", "while true; do sleep 3600; done"] # Simulating a background agent
+        - name: nginx
+          image: nginx

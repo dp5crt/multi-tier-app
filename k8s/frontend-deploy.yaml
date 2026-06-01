@@ -6,15 +6,18 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: frontend
+      app: frontend-scaler
   template:
     metadata:
       labels:
-        app: frontend
+        app: frontend-scaler
     spec:
       containers:
-      - name: web-app
-        image: web:latest
-        imagePullPolicy: Never
-        ports:
-        - containerPort: 80
+        - name: frontend-scaler
+          image: frontend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env:
+            - name: REACT_APP_API_URL
+              value: "http://backend-service:5000"

@@ -1,27 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend-service
+  name: web-service
 spec:
+  type: NodePort
   selector:
-    app: backend
+    app: frontend-scaler
   ports:
-    - protocol: TCP
-      port: 5000
-      targetPort: 5000
-  type: ClusterIP  # Hidden from the public internet
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend-service
-spec:
-  selector:
-    app: web
-  ports:
-    - protocol: TCP
-      port: 80
+    - port: 80
       targetPort: 80
-  type: NodePort   # Exposed out to your host system browser via Minikube
+      nodePort: 30125 

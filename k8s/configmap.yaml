@@ -3,12 +3,5 @@ kind: ConfigMap
 metadata:
   name: backend-config
 data:
-  DB_HOST: db-cluster-0.postgres     # Points to your StatefulSet/Service
-  DB_NAME: todo
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: frontend-config
-data:
-  REACT_APP_API_URL: http://backend-service:5000
+  DATABASE_URL: "postgresql://postgres@db-cluster:5432/todo"
+  PORT: "5000"
